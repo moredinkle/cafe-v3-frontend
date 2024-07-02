@@ -1,11 +1,13 @@
 <script setup lang="ts">
-defineProps<{
-  msg: string
-}>()
+import Button from './UI/Button.vue';
+import { BeakerIcon } from '@heroicons/vue/24/outline';
+defineProps({
+  msg: String
+})
 </script>
 
 <template>
-  <div class="greetings font-mono">
+  <div>
     <h1 class="green">{{ msg }}</h1>
     <h3>
       You’ve successfully created a project with
@@ -17,6 +19,9 @@ defineProps<{
       <div class="p-3 text-lg text-slate-100 font-sans font-bold bg-red-700 bg-opacity-60 rounded-lg">2</div>
       <div class="p-3 text-lg text-slate-100 font-sans font-bold bg-yellow-700 bg-opacity-60 rounded-lg">3</div>
     </div>
+    <Button class="bg-green-700 hover:bg-green-900 text-slate-200" text-button="A ver que pasa">
+      <BeakerIcon class="text-slate-200 w-5 h-5"></BeakerIcon>
+    </Button>
   </div>
 </template>
 

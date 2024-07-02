@@ -3,17 +3,13 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+  <body>
     <div class="container mx-auto">
-      <HelloWorld msg="You did it!" />
+      <div class="flex gap-4">
+        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+        <HelloWorld msg="You did it!" />
+      </div>
     </div>
-  </header>
+  </body>
 
-  <RouterView />
 </template>
-
-<style scoped>
-
-</style>
