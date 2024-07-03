@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import Button from './UI/Button.vue';
-import { BeakerIcon } from '@heroicons/vue/24/outline';
+import Button from "./UI/Button.vue";
+import Card from "./UI/Card.vue";
+import { BeakerIcon } from "@heroicons/vue/24/outline";
 defineProps({
-  msg: String
-})
+  msg: String,
+});
 </script>
 
 <template>
@@ -22,6 +23,13 @@ defineProps({
     <Button class="bg-green-700 hover:bg-green-900 text-slate-200" text-button="A ver que pasa">
       <BeakerIcon class="text-slate-200 w-5 h-5"></BeakerIcon>
     </Button>
+    <Card
+      title="Titulo prueba"
+      subtitle="Veremos como sale po"
+      confirm-button-text="Aceptar"
+      cancel-button-text="Cancelar"
+      class="bg-slate-100 text-black">
+      <div>Hola</div>
+    </Card>
   </div>
 </template>
-

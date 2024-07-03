@@ -5,8 +5,8 @@ defineProps({
 </script>
 
 <template>
-    <button class="flex justify-center items-center gap-2 p-2 font-bold rounded-md">
+    <button class="flex justify-center items-center gap-1 p-2 rounded-md">
       <slot></slot>
-      <span>{{ textButton }}</span>
+      <span class="text-center">{{ textButton }}</span>
     </button>
 </template>
