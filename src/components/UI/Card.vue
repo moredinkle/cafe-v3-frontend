@@ -10,24 +10,28 @@ const props = defineProps({
   dark: Boolean
 });
 
-const darkColor = computed(() => {
+const darkSoftColor = computed(() => {
   return props.dark ? 'gray-200' : 'gray-700'
-})
+});
+
+const darkColor = computed(() => {
+  return props.dark ? 'white' : 'black'
+});
 </script>
 
 <template>
     <div class="box-border border-2 shadow-lg rounded-lg flex flex-col gap-5 py-2 px-4">
       <div class="flex flex-col gap-1">
-        <span :class="`text-xl text-${dark ? 'white' : 'black'}`"> {{ title }} </span>
-        <span :class="`text-xs text-${dark ? 'white' : 'black'}`"> {{ subtitle }} </span>
-        <div :class="`border-b border-${darkColor} border-opacity-20 mt-1`"></div>
+        <span :class="`text-xl text-${darkColor}`"> {{ title }} </span>
+        <span :class="`text-xs text-${darkColor}`"> {{ subtitle }} </span>
+        <div :class="`border-b border-${darkSoftColor} border-opacity-20 mt-1`"></div>
       </div>
       
-      <slot name="default"></slot>
+      <slot name="default" :class="`text-${darkColor}`"></slot>
       
       <!-- footer -->
       <div>
-        <div :class="`border-b border-${darkColor} border-opacity-20 mb-3`"></div>
+        <div :class="`border-b border-${darkSoftColor} border-opacity-20 mb-3`"></div>
         <div class="flex gap-2 justify-end">
           <slot name="footerAdditionalButtons"></slot>
           <Button v-if="cancelButtonText" class="bg-red-600 text-white text-xs" :text-button="cancelButtonText"></Button>
