@@ -3,13 +3,8 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <body>
-    <div class="container mx-auto bg-white">
-      <div class="flex gap-4">
-        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-        <HelloWorld msg="You did it!" />
-      </div>
-    </div>
-  </body>
-
+  <nav></nav>
+  <div class="container mx-auto px-8 py-4 text-black">
+    <HelloWorld msg="You did it!" />
+  </div>
 </template>
