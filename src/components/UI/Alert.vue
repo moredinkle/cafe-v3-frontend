@@ -47,7 +47,6 @@ const iconComponent = computed(() => {
 
 const hideAlert = () => {
   setTimeout(() => {
-    console.log('ahora')
     emit('close');
   }, props.timeout);
 };
