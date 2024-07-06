@@ -8,12 +8,16 @@ const props = defineProps({
   subtitle: String,
   confirmButtonText: String,
   cancelButtonText: String,
+  dividers: {
+    type: Boolean,
+    default: false
+  }
 });
 
 </script>
 
 <template>
-    <div class="box-border border-2 shadow-lg rounded-lg flex flex-col gap-5 py-2 px-4 text-black dark:text-white">
+    <div class="box-border border-2 shadow-lg rounded-lg flex flex-col gap-3 py-2 px-4 text-black dark:text-white">
       <div>
         <SectionHeader :title="title" :subtitle="subtitle">
           <template #headerIcon>
@@ -23,14 +27,14 @@ const props = defineProps({
             <slot name="headerActions"></slot>
           </template>
         </SectionHeader>
-        <div class="border-b border-slate-700 dark:border-slate-200 border-opacity-20 mb-3"></div>
+        <div v-if="dividers" class="border-b border-slate-700 dark:border-slate-200 border-opacity-20 mb-3"></div>
       </div>
       
       <slot name="default"></slot>
       
       <!-- footer -->
       <div>
-        <div class="border-b border-slate-700 dark:border-slate-200 border-opacity-20 mb-3"></div>
+        <div v-if="dividers" class="border-b border-slate-700 dark:border-slate-200 border-opacity-20 mb-3"></div>
         <slot name="footer"></slot>
         <div class="flex gap-2 justify-end">
           <slot name="footerAdditionalButtons"></slot>

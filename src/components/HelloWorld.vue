@@ -1,20 +1,3 @@
-<script setup lang="ts">
-import Button from "./UI/Button.vue";
-import Card from "./UI/Card.vue";
-import Input from "./UI/Input.vue";
-import Alert from "./UI/Alert.vue";
-import Modal from "./UI/Modal.vue";
-import { BeakerIcon } from "@heroicons/vue/24/outline";
-import { ref } from "vue";
-defineProps({
-  msg: String,
-});
-
-const prueba = ref();
-const alertaVisible = ref(false);
-const modalVisible = ref(false);
-</script>
-
 <template>
   <div>
     <h1 class="green">{{ msg }}</h1>
@@ -36,6 +19,7 @@ const modalVisible = ref(false);
     <Card
       title="Titulo prueba"
       subtitle="Veremos como sale po"
+      dividers
       confirm-button-text="Aceptar"
       cancel-button-text="Cancelar">
       <template #headerActions>
@@ -49,12 +33,14 @@ const modalVisible = ref(false);
       <template #headerIcon>
         <BeakerIcon class="text-slate-100 w-7 h-7"></BeakerIcon>
       </template>
-      <Card
-        title="Titulo prueba"
-        subtitle="Veremos como sale po">
-        <Input v-model="prueba" label="Texto prueba" placeholder="Aquisitos jefe"></Input>
-        <div>{{ prueba }}</div>
-      </Card>
+      <Table :headers="headers" :items="items" :fields="fields" actions>
+        <template #actionsContent>
+          <Button class="py-0 px-1">
+            <CalculatorIcon class="w-4 h-4"></CalculatorIcon>
+          </Button>
+          <Button class="bg-transparent text-blue-500 py-0 px-1">Editar</Button>
+        </template>
+      </Table>
       <Input v-model="prueba" label="Texto prueba" placeholder="Aquisitos jefe"></Input>
     </Modal>
 
@@ -65,3 +51,52 @@ const modalVisible = ref(false);
       @close="alertaVisible = false"></Alert>
   </div>
 </template>
+
+
+
+<script setup lang="ts">
+import Button from "./UI/Button.vue";
+import Card from "./UI/Card.vue";
+import Input from "./UI/Input.vue";
+import Alert from "./UI/Alert.vue";
+import Modal from "./UI/Modal.vue";
+import Table from "./UI/Table.vue";
+import { BeakerIcon, CalculatorIcon } from "@heroicons/vue/24/outline";
+import { reactive, ref } from "vue";
+defineProps({
+  msg: String,
+});
+
+const prueba = ref();
+const alertaVisible = ref(false);
+const modalVisible = ref(false);
+const headers = ref(['columna 1', 'columna 2', 'columna 3', 'columna 4']);
+const fields = ref(['a', 'b', 'c', 'd']);
+const items = reactive([
+  {
+    a: 'AAA',
+    b: 'BBB',
+    c: 12,
+    d: 'Texto'
+  },
+  {
+    a: 'AAA',
+    b: 'BBB',
+    c: 12,
+    d: 'Texto'
+  },
+  {
+    a: 'AAA',
+    b: 'BBB',
+    c: 12,
+    d: 'Texto'
+  },
+  {
+    a: 'AAA',
+    b: 'BBB',
+    c: 12,
+    d: 'Texto'
+  },
+])
+
+</script>
