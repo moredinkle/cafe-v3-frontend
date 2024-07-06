@@ -3,14 +3,16 @@ import Button from "./UI/Button.vue";
 import Card from "./UI/Card.vue";
 import Input from "./UI/Input.vue";
 import Alert from "./UI/Alert.vue";
+import Modal from "./UI/Modal.vue";
 import { BeakerIcon } from "@heroicons/vue/24/outline";
-import { ref } from 'vue';
+import { ref } from "vue";
 defineProps({
   msg: String,
 });
 
 const prueba = ref();
 const alertaVisible = ref(false);
+const modalVisible = ref(false);
 </script>
 
 <template>
@@ -21,18 +23,45 @@ const alertaVisible = ref(false);
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>. What's next?
     </h3>
-    <Button class="bg-green-700 hover:bg-green-900 text-slate-200" text-button="A ver que pasa" @click="alertaVisible = !alertaVisible">
+
+    <Button
+      class="bg-green-700 hover:bg-green-900 text-slate-200"
+      text-button="A ver que pasa"
+      @click="alertaVisible = !alertaVisible">
+      <BeakerIcon class="text-slate-100 w-5 h-5"></BeakerIcon>
+    </Button>
+    <Button class="bg-teal-700" text-button="Modal" @click="modalVisible = !modalVisible">
       <BeakerIcon class="text-slate-100 w-5 h-5"></BeakerIcon>
     </Button>
     <Card
       title="Titulo prueba"
       subtitle="Veremos como sale po"
       confirm-button-text="Aceptar"
-      cancel-button-text="Cancelar"
-    >
+      cancel-button-text="Cancelar">
+      <template #headerActions>
+        <Button class="bg-yellow-500">Amarillo</Button>
+      </template>
       <Input v-model="prueba" label="Texto prueba" placeholder="Aquisitos jefe"></Input>
       <div>{{ prueba }}</div>
     </Card>
-    <Alert alert-text="Prueba alerta" class="right-4 bg-green-600" :visible="alertaVisible" @close="alertaVisible=false"></Alert>
+
+    <Modal :visible="modalVisible" @close="modalVisible = false" title="Probemos po" subtitle="subtitulo" blocked>
+      <template #headerIcon>
+        <BeakerIcon class="text-slate-100 w-7 h-7"></BeakerIcon>
+      </template>
+      <Card
+        title="Titulo prueba"
+        subtitle="Veremos como sale po">
+        <Input v-model="prueba" label="Texto prueba" placeholder="Aquisitos jefe"></Input>
+        <div>{{ prueba }}</div>
+      </Card>
+      <Input v-model="prueba" label="Texto prueba" placeholder="Aquisitos jefe"></Input>
+    </Modal>
+
+    <Alert
+      alert-text="Prueba alerta"
+      class="right-4 bg-green-600"
+      :visible="alertaVisible"
+      @close="alertaVisible = false"></Alert>
   </div>
 </template>

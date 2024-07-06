@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { ExclamationTriangleIcon, InformationCircleIcon, CheckCircleIcon, XMarkIcon, ExclamationCircleIcon } from "@heroicons/vue/24/outline";
-import { computed, onMounted, watch } from "vue";
+import { computed, watch } from "vue";
 const emit = defineEmits(['close'])
 
 const props = defineProps({
