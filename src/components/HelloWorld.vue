@@ -25,10 +25,13 @@
       <template #headerActions>
         <Button class="bg-yellow-500">Amarillo</Button>
       </template>
-      <Input v-model="prueba" label="Texto prueba asd" placeholder="Aquisitos jefe"></Input>
+      <Input v-model="prueba" placeholder="Aquisitos jefe"></Input>
       <div>{{ prueba }}</div>
       <Checkbox label="Checkea po loco" v-model="checkboxDummy"></Checkbox>
       {{ checkboxDummy }}
+      <FormFieldWrapper label="Prueba textarea" :input-col-span="9" align-items="start">
+        <Textarea rows="6" v-model="prueba" placeholder="Aquisitos jefe"></Textarea>
+      </FormFieldWrapper>
     </Card>
 
     <Modal :visible="modalVisible" @close="modalVisible = false" title="Probemos po" subtitle="subtitulo" blocked>
@@ -71,6 +74,7 @@ import Modal from "./UI/Modal.vue";
 import Table from "./UI/Table.vue";
 import Select from "./UI/Select.vue";
 import Checkbox from "./UI/Checkbox.vue";
+import Textarea from "./UI/Textarea.vue";
 import FormFieldWrapper from "./UI/FormFieldWrapper.vue";
 import { BeakerIcon, CalculatorIcon } from "@heroicons/vue/24/outline";
 import { reactive, ref } from "vue";
