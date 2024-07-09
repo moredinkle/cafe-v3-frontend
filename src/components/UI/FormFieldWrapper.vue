@@ -1,5 +1,5 @@
 <template>
-  <div :class="flexDirectionClasses">
+  <div :class="`${props.inputColSpan !== 12 ? 'flex gap-2 items-center my-2' : ''}`">
     <div :class="labelColClass">
       <label class="text-sm text-opacity-30">{{ label }}</label>
     </div>
@@ -20,18 +20,15 @@ const props = defineProps({
     validator: (value: number) => [3, 4, 6, 8, 9].includes(value),
   },
 });
-const colSpanClasses = {
-  3: "col-span-3",
-  4: "col-span-4",
-  6: "col-span-6",
-  8: "col-span-8",
-  9: "col-span-9",
-  12: "col-span-full",
-};
 
-const flexDirectionClasses = computed(() => {
-  return props.inputColSpan == 12 ? "flex flex-col gap-1 my-2" : "grid grid-cols-12 gap-2 items-center my-2";
-});
+const colSpanClasses = {
+  3: "basis-1/4",
+  4: "basis-1/3",
+  6: "basis-1/2",
+  8: "basis-2/3",
+  9: "basis-3/4",
+  12: "block",
+};
 
 const labelColSpan = computed(() => {
   return 12 - props.inputColSpan;

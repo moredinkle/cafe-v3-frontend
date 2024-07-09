@@ -25,8 +25,10 @@
       <template #headerActions>
         <Button class="bg-yellow-500">Amarillo</Button>
       </template>
-      <Input v-model="prueba" label="Texto prueba" placeholder="Aquisitos jefe"></Input>
+      <Input v-model="prueba" label="Texto prueba asd" placeholder="Aquisitos jefe"></Input>
       <div>{{ prueba }}</div>
+      <Checkbox label="Checkea po loco" v-model="checkboxDummy"></Checkbox>
+      {{ checkboxDummy }}
     </Card>
 
     <Modal :visible="modalVisible" @close="modalVisible = false" title="Probemos po" subtitle="subtitulo" blocked>
@@ -41,9 +43,10 @@
           <Button class="bg-transparent text-blue-500 py-0 px-1">Editar</Button>
         </template>
       </Table>
-      <FormFieldWrapper label="Seleccione pe loco" :input-col-span="9">
-        <Select :options="items" field="b"></Select>
+      <FormFieldWrapper label="Seleccione pe loco">
+        <Select :options="items" field="b" v-model="pruebaSelect"></Select>
       </FormFieldWrapper>
+      {{ pruebaSelect }}
       <FormFieldWrapper label="Texto prueba" :input-col-span="6">
         <Input v-model="prueba" placeholder="Aquisitos jefe"></Input>
       </FormFieldWrapper>
@@ -67,6 +70,7 @@ import Alert from "./UI/Alert.vue";
 import Modal from "./UI/Modal.vue";
 import Table from "./UI/Table.vue";
 import Select from "./UI/Select.vue";
+import Checkbox from "./UI/Checkbox.vue";
 import FormFieldWrapper from "./UI/FormFieldWrapper.vue";
 import { BeakerIcon, CalculatorIcon } from "@heroicons/vue/24/outline";
 import { reactive, ref } from "vue";
@@ -75,8 +79,10 @@ defineProps({
 });
 
 const prueba = ref();
+const pruebaSelect = ref();
 const alertaVisible = ref(false);
 const modalVisible = ref(false);
+const checkboxDummy = ref(false);
 const headers = ref(['columna 1', 'columna 2', 'columna 3', 'columna 4']);
 const fields = ref(['a', 'b', 'c', 'd']);
 const options = ['ocpion 1', 'ocpion 1', 'ocpion 1', 'ocpion 1'];
@@ -91,19 +97,19 @@ const items = reactive([
     a: 'AAA',
     b: 'BBB',
     c: 12,
-    d: 'Texto'
+    d: 'Texto2'
   },
   {
     a: 'AAA',
     b: 'BBB',
     c: 12,
-    d: 'Texto'
+    d: 'Text3'
   },
   {
     a: 'AAA',
     b: 'BBB',
     c: 12,
-    d: 'Texto'
+    d: 'Texto4'
   },
 ])
 

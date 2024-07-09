@@ -34,6 +34,7 @@
 <script setup lang="ts">
 import { XMarkIcon } from "@heroicons/vue/24/outline";
 import SectionHeader from "./SectionHeader.vue";
+import Button from "./Button.vue";
 
 const props = defineProps({
   visible: {
