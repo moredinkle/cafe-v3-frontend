@@ -53,6 +53,9 @@
       <FormFieldWrapper label="Texto prueba" :input-col-span="6">
         <Input v-model="prueba" placeholder="Aquisitos jefe"></Input>
       </FormFieldWrapper>
+      <Badge class="bg-orange-600 text-orange-200" badge-text="Texto">
+        <CalculatorIcon class="w-4 h-4"></CalculatorIcon>
+      </Badge>
     </Modal>
 
     <Alert
@@ -75,6 +78,7 @@ import Table from "./UI/Table.vue";
 import Select from "./UI/Select.vue";
 import Checkbox from "./UI/Checkbox.vue";
 import Textarea from "./UI/Textarea.vue";
+import Badge from "./UI/Badge.vue";
 import FormFieldWrapper from "./UI/FormFieldWrapper.vue";
 import { BeakerIcon, CalculatorIcon } from "@heroicons/vue/24/outline";
 import { reactive, ref } from "vue";
