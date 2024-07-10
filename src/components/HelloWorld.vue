@@ -30,7 +30,7 @@
       <Checkbox label="Checkea po loco" v-model="checkboxDummy"></Checkbox>
       {{ checkboxDummy }}
       <FormFieldWrapper label="Prueba textarea" :input-col-span="9" align-items="start">
-        <Textarea rows="6" v-model="prueba" placeholder="Aquisitos jefe"></Textarea>
+        <Textarea rows="6" v-model="prueba" placeholder="Aquisitos jefe" :error="true"></Textarea>
       </FormFieldWrapper>
     </Card>
 
@@ -47,11 +47,11 @@
         </template>
       </Table>
       <FormFieldWrapper label="Seleccione pe loco">
-        <Select :options="items" field="b" v-model="pruebaSelect"></Select>
+        <Select :options="items" field="b" v-model="pruebaSelect" :error="true"></Select>
       </FormFieldWrapper>
       {{ pruebaSelect }}
-      <FormFieldWrapper label="Texto prueba" :input-col-span="6">
-        <Input v-model="prueba" placeholder="Aquisitos jefe"></Input>
+      <FormFieldWrapper label="Texto prueba" :input-col-span="6" align-items="start">
+        <Input v-model="prueba" placeholder="Aquisitos jefe" :error="prueba.length > 10 ? true : false"></Input>
       </FormFieldWrapper>
       <Badge class="bg-orange-600 text-orange-200" badge-text="Texto">
         <CalculatorIcon class="w-4 h-4"></CalculatorIcon>

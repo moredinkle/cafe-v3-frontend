@@ -1,17 +1,20 @@
 <template>
-  <select
-    v-model="selectedValue"
-    v-bind="$attrs"
-    class="w-full border border-black dark:border-slate-500 px-2 py-1 rounded-md shadow-sm dark:bg-slate-800">
-    <option :value="null" disabled hidden>{{ placeholder }}</option>
-    <option v-for="(option, index) in options" :key="index" :value="option">
-      {{ option?.[field as keyof typeof option] || option }}
-    </option>
-  </select>
+  <div>
+    <select
+      v-model="selectedValue"
+      v-bind="$attrs"
+      :class="inputClass">
+      <option :value="null" disabled hidden>{{ placeholder }}</option>
+      <option v-for="(option, index) in options" :key="index" :value="option">
+        {{ option?.[field as keyof typeof option] || option }}
+      </option>
+    </select>
+    <span v-if="error" class="text-red-500 text-xs block font-semibold mx-1">{{ errorMessage }}</span>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, type PropType } from "vue";
+import { computed, ref, type PropType } from "vue";
 
 type Option = string | number | object | null;
 
@@ -23,10 +26,20 @@ const props = defineProps({
   field: String,
   placeholder: {
     type: String,
-    default: 'Seleccione una opción'
-  }
+    default: "Seleccione una opción",
+  },
+  error: Boolean,
+  errorMessage: {
+    type: String,
+    default: "Campo inválido",
+  },
 });
+
+const inputClass = computed(() => {
+  return props.error
+    ? "w-full px-2 py-1 rounded-md shadow-sm dark:bg-slate-800 border-red-600 focus:ring-red-600"
+    : "w-full border border-black dark:border-slate-500 px-2 py-1 rounded-md shadow-sm dark:bg-slate-800";
+});
+
 const selectedValue = ref<Option>(null);
-
-
 </script>
