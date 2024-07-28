@@ -26,6 +26,9 @@
         <Button class="bg-yellow-500">Amarillo</Button>
       </template>
       <Input v-model="prueba" placeholder="Aquisitos jefe"></Input>
+      <IconInput v-model="prueba" placeholder="Aquisitos jefe" :error="prueba?.length > 10">
+        <MagnifyingGlassIcon class="w-4 h-4"></MagnifyingGlassIcon>
+      </IconInput>
       <div>{{ prueba }}</div>
       <Checkbox label="Checkea po loco" v-model="checkboxDummy"></Checkbox>
       {{ checkboxDummy }}
@@ -51,7 +54,7 @@
       </FormFieldWrapper>
       {{ pruebaSelect }}
       <FormFieldWrapper label="Texto prueba" :input-col-span="6" align-items="start">
-        <Input v-model="prueba" placeholder="Aquisitos jefe" :error="prueba.length > 10 ? true : false"></Input>
+        <Input v-model="prueba" placeholder="Aquisitos jefe" :error="prueba?.length > 10 ? true : false"></Input>
       </FormFieldWrapper>
       <Badge class="bg-orange-600 text-orange-200" badge-text="Texto">
         <CalculatorIcon class="w-4 h-4"></CalculatorIcon>
@@ -79,8 +82,9 @@ import Select from "./UI/Select.vue";
 import Checkbox from "./UI/Checkbox.vue";
 import Textarea from "./UI/Textarea.vue";
 import Badge from "./UI/Badge.vue";
+import IconInput from "./UI/IconInput.vue";
 import FormFieldWrapper from "./UI/FormFieldWrapper.vue";
-import { BeakerIcon, CalculatorIcon } from "@heroicons/vue/24/outline";
+import { BeakerIcon, CalculatorIcon, MagnifyingGlassIcon } from "@heroicons/vue/24/outline";
 import { reactive, ref } from "vue";
 defineProps({
   msg: String,

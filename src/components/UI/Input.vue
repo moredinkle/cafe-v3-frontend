@@ -19,7 +19,7 @@ const props = defineProps({
 
 const inputClass = computed(() => {
   return props.error
-    ? "w-full border-red-600 focus:ring-2 focus:outline-none focus:ring-red-600 px-2 py-1 rounded-md shadow-sm dark:bg-slate-800"
+    ? "w-full border-2 border-red-600 focus:ring-2 focus:outline-none focus:ring-red-600 px-2 py-1 rounded-md shadow-sm dark:bg-slate-800"
     : "w-full border focus:ring-2 focus:outline-none focus:ring-blue-600 px-2 py-1 rounded-md shadow-sm dark:bg-slate-800";
 });
 </script>

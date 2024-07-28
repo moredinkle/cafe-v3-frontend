@@ -37,7 +37,7 @@ const props = defineProps({
 
 const inputClass = computed(() => {
   return props.error
-    ? "w-full px-2 py-1 rounded-md shadow-sm dark:bg-slate-800 border-red-600 focus:ring-red-600"
+    ? "w-full border-2 px-2 py-1 rounded-md shadow-sm dark:bg-slate-800 border-red-600 focus:ring-red-600"
     : "w-full border border-black dark:border-slate-500 px-2 py-1 rounded-md shadow-sm dark:bg-slate-800";
 });
 
