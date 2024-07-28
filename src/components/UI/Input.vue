@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input :class="inputClass" v-bind="$attrs" v-model="model" />
+    <input :class="[inputClass, 'custom-input']" v-bind="$attrs" v-model="model" />
     <span v-if="error" class="text-red-500 text-xs block font-semibold mx-1">{{ errorMessage }}</span>
   </div>
 </template>
@@ -23,3 +23,9 @@ const inputClass = computed(() => {
     : "w-full border focus:ring-2 focus:outline-none focus:ring-blue-600 px-2 py-1 rounded-md shadow-sm dark:bg-slate-800";
 });
 </script>
+
+<style scoped>
+.custom-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+</style>

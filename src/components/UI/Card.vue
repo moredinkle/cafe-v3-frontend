@@ -1,25 +1,7 @@
-<script setup lang="ts">
-import { computed } from 'vue';
-import Button from './Button.vue';
-import SectionHeader from "./SectionHeader.vue";
-
-const props = defineProps({
-  title: String,
-  subtitle: String,
-  confirmButtonText: String,
-  cancelButtonText: String,
-  dividers: {
-    type: Boolean,
-    default: false
-  }
-});
-
-</script>
-
 <template>
     <div class="box-border border-2 shadow-lg rounded-lg flex flex-col gap-3 py-2 px-4 text-black dark:text-white">
       <div>
-        <SectionHeader :title="title" :subtitle="subtitle">
+        <SectionHeader :title="title" :subtitle="subtitle" :text-size="headerSize">
           <template #headerIcon>
             <slot name="headerIcon"></slot>
           </template>
@@ -44,3 +26,22 @@ const props = defineProps({
       </div>
     </div>
 </template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import Button from './Button.vue';
+import SectionHeader from "./SectionHeader.vue";
+
+const props = defineProps({
+  title: String,
+  subtitle: String,
+  confirmButtonText: String,
+  cancelButtonText: String,
+  headerSize: String,
+  dividers: {
+    type: Boolean,
+    default: false
+  }
+});
+
+</script>
