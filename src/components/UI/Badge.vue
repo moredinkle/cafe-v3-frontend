@@ -1,7 +1,7 @@
 <template>
-    <span class="flex justify-center items-center gap-0.5 py-1 px-2 tracking-wide rounded-md w-fit">
+    <span class="flex justify-center items-center gap-0.5 py-0.5 px-1.5 tracking-wide rounded-md w-fit">
       <slot></slot>
-      <span class="text-xs font-semibold text-opacity-30">{{ badgeText }}</span>
+      <span class="text-xs font-light text-opacity-30">{{ badgeText }}</span>
     </span>
 </template>
 

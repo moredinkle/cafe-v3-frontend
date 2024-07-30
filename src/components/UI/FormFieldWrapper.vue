@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapperClass">
+  <div :class="[wrapperClass]">
     <div :class="labelColClass">
       <label class="text-sm text-opacity-30">{{ label }}</label>
     </div>
@@ -17,7 +17,7 @@ const props = defineProps({
   inputColSpan: {
     type: Number,
     default: 12,
-    validator: (value: number) => [3, 4, 6, 8, 9].includes(value),
+    validator: (value: number) => [3, 4, 6, 8, 9, 12].includes(value),
   },
   alignItems: {
     type: String,
@@ -69,14 +69,14 @@ const wrapperClass = computed(() => {
   if(props.inputColSpan === 12) {
     return '';
   }
-  let res = 'flex gap-2 my-2 ';
+  let res = 'flex gap-2';
   res += isValidAlignClass(props.alignItems) ? alignClasses[props.alignItems] : alignClasses.center
   res += isValidJustifyClass(props.justifyContent) ? justifyClasses[props.justifyContent] : justifyClasses.center
   return res;
 });
 
 function isValidColSpan(value: number): value is keyof typeof colSpanClasses {
-  return [3, 4, 6, 8, 9].includes(value);
+  return [3, 4, 6, 8, 9, 12].includes(value);
 }
 function isValidAlignClass(value: string): value is keyof typeof alignClasses {
   return ['start', 'center', 'end'].includes(value);

@@ -7,27 +7,45 @@
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 my-8">
     <Card
       class="transition-transform duration-300 transform hover:scale-110 dark:hover:bg-slate-700 hover:bg-slate-200"
+      header-size="small"
+      @click="goToMenu(menu)"
       v-for="menu in menus"
       :key="menu.id"
-      :title="menu.formattedDate"
-      :subtitle="menu.status"
-      header-size="small"></Card>
-    <Card title="25-07-2024" subtitle="Activo" header-size="small"></Card>
-    <Card title="25-07-2024" subtitle="Terminado" header-size="small"></Card>
-    <Card title="25-07-2024" subtitle="Terminado" header-size="small"></Card>
+      >
+      <template #headerMain>
+        <div>
+          <p class="block text-2xl font-semibold tracking-wider">{{ menu.date.toLocaleDateString() }}</p>
+          <Badge :badge-text="menu.status" :class="[statusBadgeColor(menu), 'block']"></Badge>
+        </div>
+      </template>
+    </Card>
   </div>
   <HelloWorld msg="You did it!" />
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { MagnifyingGlassIcon } from "@heroicons/vue/24/outline";
 import axios from "axios";
 import { type Menu } from "@/utils/types";
 import { Mapper } from "@/utils/mapper";
+import router from "@/router";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const menus = ref<Menu[]>([]);
+
+const statusBadgeColor = (menu: Menu) => {
+  console.log('entra')
+  if(menu.status.toLowerCase() === "activo") {
+    return 'bg-green-600'
+  }
+  else if(menu.status.toLowerCase() === "inactivo") {
+    return 'bg-gray-600'
+  }
+  else if(menu.status.toLowerCase() === "terminado") {
+    return 'bg-red-600'
+  }
+  return '';
+}
 
 async function getMenus() {
   try {
@@ -36,6 +54,10 @@ async function getMenus() {
   } catch (err) {
     console.log(err);
   }
+}
+
+function goToMenu(menu: Menu) {
+  router.push(`/menus/${menu.id}`)
 }
 
 onMounted(async () => {

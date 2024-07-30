@@ -21,6 +21,7 @@ declare module 'vue' {
     IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
     Input: typeof import('./src/components/UI/Input.vue')['default']
+    MenuItems: typeof import('./src/components/menuDetail/MenuItems.vue')['default']
     Modal: typeof import('./src/components/UI/Modal.vue')['default']
     Navbar: typeof import('./src/components/UI/Navbar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
@@ -28,6 +29,7 @@ declare module 'vue' {
     SectionHeader: typeof import('./src/components/UI/SectionHeader.vue')['default']
     Select: typeof import('./src/components/UI/Select.vue')['default']
     Table: typeof import('./src/components/UI/Table.vue')['default']
+    Tabs: typeof import('./src/components/UI/Tabs.vue')['default']
     Textarea: typeof import('./src/components/UI/Textarea.vue')['default']
   }
 }

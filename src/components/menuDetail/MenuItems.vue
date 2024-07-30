@@ -1,0 +1,65 @@
+<template>
+  <p>aaa</p>
+  <Button @click="newItemModalVisible = true" text-button="Añadir al menú" class="bg-green-600">
+    <BriefcaseIcon class="size-5"></BriefcaseIcon>
+  </Button>
+
+  <div class="grid grid-cols-2 gap-4">
+    <Card v-for="item in menuItems" :title="item.product.name" :subtitle="`Bs. ${item.price}`">
+      <template #headerActions>
+        <div class="flex justify-end items-center gap-2">
+          <Button class="bg-transparent font-semibold rounded-full border-2">
+            <PencilSquareIcon class="size-5"></PencilSquareIcon>
+          </Button>
+          <Button class="bg-transparent font-semibold rounded-full border-2">
+            <TrashIcon class="size-5"></TrashIcon>
+          </Button>
+        </div>
+      </template>
+      <Badge :badge-text="`Disponibles: ${item.stock}`" class="bg-rose-700"></Badge>
+    </Card>
+  </div>
+
+
+  <Modal title="Añadir al menú" :visible="newItemModalVisible" @close="newItemModalVisible = false">
+    <Card confirm-button-text="Guardar" cancel-button-text="Cancelar">
+      <FormFieldWrapper label="Producto" :input-col-span="12">
+        <Select :options="products" field="name" placeholder="Seleccione un producto"></Select>
+      </FormFieldWrapper>
+      <FormFieldWrapper label="Precio" :input-col-span="12">
+        <Input :model-value="newItemPrice"/>
+      </FormFieldWrapper>
+      <FormFieldWrapper label="Stock" :input-col-span="12">
+        <Input :model-value="newItemStock"/>
+      </FormFieldWrapper>
+    </Card>
+  </Modal>
+</template>
+
+<script setup lang="ts">
+import { Mapper } from "@/utils/mapper";
+import type { MenuItem, Product } from "@/utils/types";
+import { BriefcaseIcon, PencilSquareIcon, TrashIcon } from "@heroicons/vue/24/outline";
+import axios from "axios";
+import { onMounted, ref, type PropType } from "vue";
+
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+const props = defineProps({
+  menuItems: {
+    type: Array as PropType<MenuItem[]>
+  }
+})
+
+const newItemModalVisible = ref(false);
+const products = ref([] as Product[]);
+const newItemPrice = ref('');
+const newItemStock = ref('');
+
+const getProducts = async () => {
+  const response = await axios.get(`${backendUrl}/products`);
+  products.value = response.data.data.map((item: any) => Mapper.toProduct(item));
+};
+
+onMounted(getProducts);
+</script>

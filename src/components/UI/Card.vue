@@ -5,6 +5,9 @@
           <template #headerIcon>
             <slot name="headerIcon"></slot>
           </template>
+          <template #headerMain>
+            <slot name="headerMain"></slot>
+          </template>
           <template #headerActions>
             <slot name="headerActions"></slot>
           </template>

@@ -21,7 +21,7 @@
 
       <slot name="default"></slot>
 
-      <footer class="flex justify-end pt-4 px-1">
+      <footer v-if="footerButtonText" class="flex justify-end pt-4 px-1">
         <slot name="footerContent"></slot>
         <Button class="bg-transparent text-blue-500 font-bold tracking-wider" @click="closeModal(true)">
           {{ footerButtonText.toUpperCase() }}
@@ -44,10 +44,7 @@ const props = defineProps({
   blocked: Boolean,
   title: String,
   subtitle: String,
-  footerButtonText: {
-    type: String,
-    default: "Aceptar",
-  },
+  footerButtonText: String
 });
 
 const emit = defineEmits(["close"]);
