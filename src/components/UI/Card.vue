@@ -23,8 +23,8 @@
         <slot name="footer"></slot>
         <div class="flex gap-2 justify-end">
           <slot name="footerAdditionalButtons"></slot>
-          <Button v-if="cancelButtonText" class="bg-red-600 text-white text-xs" :text-button="cancelButtonText"></Button>
-          <Button v-if="confirmButtonText" class="bg-green-600 text-white text-xs" :text-button="confirmButtonText"></Button>
+          <Button v-if="cancelButtonText" @click="emit('cancelClicked')" class="bg-red-600 text-white text-xs" :text-button="cancelButtonText"></Button>
+          <Button v-if="confirmButtonText" @click="emit('confirmClicked')" class="bg-green-600 text-white text-xs" :text-button="confirmButtonText"></Button>
         </div>
       </div>
     </div>
@@ -34,6 +34,8 @@
 import { computed } from 'vue';
 import Button from './Button.vue';
 import SectionHeader from "./SectionHeader.vue";
+
+const emit = defineEmits(['cancelClicked', 'confirmClicked']);
 
 const props = defineProps({
   title: String,

@@ -8,10 +8,10 @@
     <Card v-for="item in menuItems" :title="item.product.name" :subtitle="`Bs. ${item.price}`">
       <template #headerActions>
         <div class="flex justify-end items-center gap-2">
-          <Button class="bg-transparent font-semibold rounded-full border-2">
-            <PencilSquareIcon class="size-5"></PencilSquareIcon>
+          <Button class="bg-transparent font-semibold rounded-3xl border-2">
+            <PencilIcon class="size-5"></PencilIcon>
           </Button>
-          <Button class="bg-transparent font-semibold rounded-full border-2">
+          <Button class="bg-transparent font-semibold rounded-3xl border-2">
             <TrashIcon class="size-5"></TrashIcon>
           </Button>
         </div>
@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { Mapper } from "@/utils/mapper";
 import type { MenuItem, Product } from "@/utils/types";
-import { BriefcaseIcon, PencilSquareIcon, TrashIcon } from "@heroicons/vue/24/outline";
+import { BriefcaseIcon, PencilIcon, TrashIcon } from "@heroicons/vue/24/outline";
 import axios from "axios";
 import { onMounted, ref, type PropType } from "vue";
 

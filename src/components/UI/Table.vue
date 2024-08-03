@@ -1,8 +1,9 @@
 <template>
   <div class="relative overflow-x-auto shadow-lg rounded-lg">
     <table class="w-full text-sm text-left">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-300">
         <tr>
+          <th v-if="indexColumn" class="p-1 font-semibold text-center">#</th>
           <th class="p-3 font-semibold" v-for="header in headers">
             {{ header }}
           </th>
@@ -11,9 +12,10 @@
       </thead>
       <tbody>
         <tr
-          v-for="(item, index) in items"
-          :key="index"
-          class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-100 even:dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700">
+        v-for="(item, index) in items"
+        :key="index"
+        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-100 even:dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
+          <td v-if="indexColumn" class="text-center font-extralight">{{ index+1 }}</td>
           <td class="py-2 px-3" v-for="field in fields" :key="field">
             {{ item[field as keyof typeof item] }}
           </td>
@@ -43,6 +45,7 @@ defineProps({
     type: Array as PropType<Object[]>,
     required: true,
   },
+  indexColumn: Boolean,
   actions: Boolean
 });
 </script>
