@@ -17,15 +17,13 @@ const useAlert = () => {
     icon: '',
   });
 
-  const showAlert = (msg: string, iconType: AlertIcon = 'info', color: string = 'bg-blue-600', timeout: number = 2000) => {
+  const showAlert = (msg: string, iconType: AlertIcon = 'info', color: string = 'bg-blue-600', timeout: number = 5000) => {
     alertState.visible = true;
     alertState.message = msg;
     alertState.color = color;
     alertState.icon = iconType;
-    console.log('llega')
     setTimeout(() => {
       alertState.visible = false;
-      console.log('sale')
     }, timeout);
   };
 

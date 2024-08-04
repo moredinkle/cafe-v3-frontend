@@ -7,9 +7,11 @@
   <Table :items="products" :fields="['name', 'category']" :headers="['Nombre', 'Categoria']" actions index-column>
     <template #actionsContent>
       <Button class="py-0 px-1">
-        <CalculatorIcon class="w-4 h-4"></CalculatorIcon>
+        <PencilIcon class="size-5 text-blue-600 dark:text-blue-400"></PencilIcon>
       </Button>
-      <Button class="bg-transparent text-blue-500 py-0 px-1">Editar</Button>
+      <Button class="py-0 px-1">
+        <TrashIcon class="size-5 text-blue-600 dark:text-blue-400"></TrashIcon>
+      </Button>
     </template>
   </Table>
 
@@ -20,7 +22,7 @@
       @cancel-clicked="newProductModalVisible = false"
       @confirm-clicked="saveProduct">
       <FormFieldWrapper label="Nombre">
-        <Input :model-value="newProductName" :error="nameError" :error-message="nameErrorMessage" />
+        <Input v-model="newProductName" :error="nameError" :error-message="nameErrorMessage" />
       </FormFieldWrapper>
       <FormFieldWrapper label="Categoria" class="mb-4">
         <Select
@@ -41,7 +43,7 @@ import { inject, onMounted, ref } from "vue";
 import axios from "axios";
 import { type Product } from "@/utils/types";
 import { Mapper } from "@/utils/mapper";
-import { CalculatorIcon } from "@heroicons/vue/24/outline";
+import { PencilIcon, TrashIcon } from "@heroicons/vue/24/outline";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const alert = inject('alert') as any;
@@ -77,26 +79,34 @@ const cleanForm = () => {
 
 const saveProduct = async () => {
   try {
-    if (!newProductCategory) {
+    categoryError.value = false;
+    nameError.value = false;
+    
+    if (!newProductCategory.value) {
       categoryError.value = true;
       categoryErrorMessage.value = "Debe seleccionar una categoria";
     }
-    if (!newProductName) {
+    if (!newProductName.value) {
       nameError.value = true;
       nameErrorMessage.value = "Campo obligatorio";
     }
+
+    if(nameError.value || categoryError.value){
+      return;
+    }
     const body = {
       name: newProductName.value,
-      category: newProductCategory.value,
+      category: newProductCategory.value.toUpperCase(),
     };
-    throw new Error("que ha pasao");
     const response = await axios.post(`${backendUrl}/products`, body);
+    newProductModalVisible.value = false;
+    alert.showAlert("Producto creado con exito", "success", "bg-green-600");
+    await getProducts();
     cleanForm();
   }
   catch (err: any) {
-    alert.showAlert(err as string, "error", "bg-red-600");
-    if (err.response?.status == 400) {
-      alert.showAlert("This is a test alert!", "error", "bg-red-600");
+    if (err.response?.status >= 400) {
+      alert.showAlert(err.response.data.message || err as string, "error", "bg-red-600");
     }
   }
 };

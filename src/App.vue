@@ -7,5 +7,5 @@ import Navbar from './components/UI/Navbar.vue';
   <div class="container mx-auto px-8 sm:px-12 lg:px-24 xl:px-32 py-8 text-black dark:text-white bg-slate-100 dark:bg-slate-800">
     <RouterView />
   </div>
-  <Alert />
+  <Alert class="mx-5"/>
 </template>

@@ -1,19 +1,19 @@
 <template>
-  <div v-if="visible" :class="[color, 'flex justify-between items-start fixed bottom-4 text-white rounded-lg shadow-lg xs:w-full md:w-72']">
+  <div v-if="visible" :class="[color, 'z-50 flex justify-between items-start fixed bottom-4 text-white rounded-lg shadow-lg xs:w-full md:w-72 lg:w-96']">
     <div class="flex gap-2 items-center p-4">
-      <component :is="iconComponent" class="h-5 w-5" />
+      <component :is="iconComponent" class="size-6" />
       <span class="font-medium">{{ message }}</span>
     </div>
-    <button class="relative top-2 right-2" @click="alert.alertStore.hideAlert">
-      <XMarkIcon class="h-4 w-4"></XMarkIcon>
+    <button class="relative top-2 right-2" @click="hideAlert">
+      <XCircleIcon class="size-5"></XCircleIcon>
     </button>
   </div>
 </template>
 
 
 <script setup lang="ts">
-import { ExclamationTriangleIcon, InformationCircleIcon, CheckCircleIcon, XMarkIcon, ExclamationCircleIcon } from "@heroicons/vue/24/outline";
-import { computed, inject, onMounted, watch} from "vue";
+import { ExclamationTriangleIcon, InformationCircleIcon, CheckCircleIcon, XCircleIcon, ExclamationCircleIcon } from "@heroicons/vue/24/outline";
+import { computed, inject } from "vue";
 
 const alert = inject('alert') as any;
 const visible = computed(() => alert.alertState.visible);
@@ -36,11 +36,8 @@ const iconComponent = computed(() => {
   }
 });
 
-watch(visible, (newVal, oldVal) => {
-  console.log('iconComponent changed from', oldVal, 'to', newVal);
-});
+const hideAlert = () => {
+  alert.hideAlert();
+};
 
-onMounted(() => {
-  console.log('montada');
-});
 </script>
