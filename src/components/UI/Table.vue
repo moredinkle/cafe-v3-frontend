@@ -20,7 +20,7 @@
             {{ item[field as keyof typeof item] }}
           </td>
           <td v-if="actions" class="py-2 px-3 flex justify-start items-center">
-            <slot name="actionsContent"></slot>
+            <slot name="actionsContent" :item="item"></slot>
 
           </td>
         </tr>

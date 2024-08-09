@@ -41,3 +41,9 @@ export type MenuStatus = "ACTIVO" | "INACTIVO" | "TERMINADO";
 export type OrderType = "VENTA" | "SERVIDOR";
 export type ExtraType = "GASTO" | "INGRESO" | "INFORMACION";
 export type ProductCategory = "DULCE" | "SALADO" | "BEBIDA";
+
+export enum ProductCategories {
+  ducle = "DULCE",
+  salado = "SALADO",
+  bebida = "BEBIDA"
+}

@@ -4,7 +4,7 @@
       v-model="selectedValue"
       v-bind="$attrs"
       :class="inputClass">
-      <option :value="null" disabled hidden>{{ placeholder }}</option>
+      <option :value="''" disabled hidden>{{ placeholderText }}</option>
       <option v-for="(option, index) in options" :key="index" :value="option">
         {{ option?.[field as keyof typeof option] || option }}
       </option>
@@ -12,9 +12,10 @@
     <span v-if="error" class="text-red-500 text-xs block font-semibold mx-1">{{ errorMessage }}</span>
   </div>
 </template>
+<!-- !!! v-model debe iniciar como string vacio '' para poder ver el placeholder -->
 
 <script setup lang="ts">
-import { computed, ref, type PropType } from "vue";
+import { computed, type PropType } from "vue";
 
 type Option = string | number | object | null;
 
@@ -24,7 +25,7 @@ const props = defineProps({
     required: true,
   },
   field: String,
-  placeholder: {
+  placeholderText: {
     type: String,
     default: "Seleccione una opción",
   },
@@ -41,5 +42,5 @@ const inputClass = computed(() => {
     : "w-full border border-black dark:border-slate-500 px-2 py-1 rounded-md shadow-sm dark:bg-slate-800";
 });
 
-const selectedValue = ref<Option>(null);
+const selectedValue = defineModel();
 </script>
