@@ -28,7 +28,10 @@ import { XMarkIcon } from "@heroicons/vue/24/outline";
 type Option = string | number | object | null;
 
 const props = defineProps({
-  selectedList: Array as PropType<Option[]>,
+  selectedItems: {
+    type: Array as PropType<Option[]>,
+    required: true
+  },
   options: {
     type: Array as PropType<Option[]>,
     required: true,
@@ -46,24 +49,22 @@ const props = defineProps({
 });
 
 const selectModel = ref<Option>('');
-const selectedItems = ref<Option[]>([]);
-const emit = defineEmits(['update:selectedItems']);
+// const selectedItems = ref<Option[]>([]);
+const emit = defineEmits(['pushItem', 'removeItem']);
 
 const handleSelectedChange = (selected: Option) => {
-  if(selectedItems.value.includes(selectModel.value)){
+  if(props.selectedItems.includes(selectModel.value)){
     return;
   }
-  selectedItems.value.push(typeof selectModel.value === 'object' ? {...selectModel.value} : selectModel.value);
-  emit('update:selectedItems', selectedItems.value);
+  const cleanedValue = typeof selectModel.value === 'object' ? {...selectModel.value} : selectModel.value
+  emit('pushItem', cleanedValue);
   selectModel.value = '';
 };
 
 const removeFromSelected = (index: number) => {
-  selectedItems.value.splice(index,1);
-  emit('update:selectedItems', selectedItems.value);
-  if(selectedItems.value.length === 0) {
+  emit('removeItem', index);
+  if(props.selectedItems.length === 0) {
     selectModel.value = '';
   }
-  
 };
 </script>

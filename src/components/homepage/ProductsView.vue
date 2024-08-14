@@ -20,7 +20,9 @@
         <MultiSelect
           :options="categorias"
           placeholder-text="Categorias"
-          @update:selectedItems="updateSelectedItems">
+          :selected-items="filterParam"
+          @push-item="pushToFilterArray"
+          @remove-item="removeFromFilterArray">
         </MultiSelect>
       </div>
     </div>
@@ -102,8 +104,12 @@ const getProducts = async () => {
   }
 };
 
-const updateSelectedItems = (items: Option[]) => {
-  filterParam.value = items;
+const pushToFilterArray = (item: Option) => {
+  filterParam.value.push(item);
+};
+
+const removeFromFilterArray = (index: number) => {
+  filterParam.value.splice(index,1);
 };
 
 const clearSearchBar = () => {
