@@ -3,7 +3,8 @@
     <select
       v-model="selectedValue"
       v-bind="$attrs"
-      :class="inputClass">
+      :class="inputClass"
+      @change="emitChange">
       <option :value="''" disabled hidden>{{ placeholderText }}</option>
       <option v-for="(option, index) in options" :key="index" :value="option">
         {{ option?.[field as keyof typeof option] || option }}
@@ -16,8 +17,8 @@
 
 <script setup lang="ts">
 import { computed, type PropType } from "vue";
+import { type Option } from "@/utils/types";
 
-type Option = string | number | object | null;
 
 const props = defineProps({
   options: {
@@ -43,4 +44,9 @@ const inputClass = computed(() => {
 });
 
 const selectedValue = defineModel();
+
+const emit = defineEmits(["changeSelected"]);
+const emitChange = () => {
+  emit("changeSelected", selectedValue);
+};
 </script>

@@ -24,6 +24,7 @@ declare module 'vue' {
     MenuItems: typeof import('./src/components/menuDetail/MenuItems.vue')['default']
     MenusView: typeof import('./src/components/homepage/MenusView.vue')['default']
     Modal: typeof import('./src/components/UI/Modal.vue')['default']
+    MultiSelect: typeof import('./src/components/UI/MultiSelect.vue')['default']
     Navbar: typeof import('./src/components/UI/Navbar.vue')['default']
     ProductsView: typeof import('./src/components/homepage/ProductsView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
