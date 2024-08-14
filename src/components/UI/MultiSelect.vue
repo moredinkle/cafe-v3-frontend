@@ -1,12 +1,14 @@
 <template>
   <Select
+    class="w-full"
     :options="options"
     :field="field"
     :error="error"
     :error-message="errorMessage"
+    :placeholder-text="placeholderText"
     v-model="selectModel"
     @change-selected="handleSelectedChange"></Select>
-    <div class="flex gap-1 my-1">
+    <div class="flex flex-wrap gap-1 my-2">
         <Badge
           v-for="(item,index) in selectedItems"
           :key="index"
@@ -26,6 +28,7 @@ import { XMarkIcon } from "@heroicons/vue/24/outline";
 type Option = string | number | object | null;
 
 const props = defineProps({
+  selectedList: Array as PropType<Option[]>,
   options: {
     type: Array as PropType<Option[]>,
     required: true,
@@ -52,11 +55,15 @@ const handleSelectedChange = (selected: Option) => {
   }
   selectedItems.value.push(typeof selectModel.value === 'object' ? {...selectModel.value} : selectModel.value);
   emit('update:selectedItems', selectedItems.value);
+  selectModel.value = '';
 };
 
 const removeFromSelected = (index: number) => {
   selectedItems.value.splice(index,1);
   emit('update:selectedItems', selectedItems.value);
+  if(selectedItems.value.length === 0) {
+    selectModel.value = '';
+  }
   
 };
 </script>

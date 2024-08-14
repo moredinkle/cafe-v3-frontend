@@ -4,28 +4,28 @@
       <span class="font-semibold text-xl">Filtros</span>
       <Button text-button="Crear nuevo producto" @click="openCreateForm" class="bg-green-600 py-1.5 px-4"></Button>
     </div>
-    <div class="my-4 flex gap-2 items-center">
-      <span class="w-1/4">
-        <MultiSelect
-          :options="categorias"
-          placeholder-text="Seleccione una categoria"
-          @update:selectedItems="updateSelectedItems"></MultiSelect>
-      </span>
-      <span class="w-1/2">
-        <IconInput v-model="searchParam" placeholder="Buscar...">
+    <div class="my-4 grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-2">
+      <IconInput v-model="searchParam" class="w-full col-span-2" placeholder="Buscar...">
+        <MagnifyingGlassIcon class="size-4"></MagnifyingGlassIcon>
+      </IconInput>
+      <div class="flex w-full gap-2 order-3 md:order-2">
+        <Button text-button="Buscar" @click="searchProducts" class="bg-blue-600 py-1.5 w-full h-fit">
           <MagnifyingGlassIcon class="size-4"></MagnifyingGlassIcon>
-        </IconInput>
-      </span>
-      <span class="w-1/4 flex gap-1">
-        <Button text-button="Limpiar" @click="openCreateForm" class="bg-gray-600 py-1.5 w-full">
+        </Button>
+        <Button text-button="Limpiar" @click="clearSearchBar" class="bg-gray-600 py-1.5 w-full h-fit">
           <BackspaceIcon class="size-4"></BackspaceIcon>
         </Button>
-        <Button text-button="Buscar" @click="searchProducts" class="bg-blue-600 py-1.5 w-full">
-          <MagnifyingGlassIcon class="size-4"></MagnifyingGlassIcon>
-        </Button>
-      </span>
+      </div>
+      <div class="col-span-2 xl:col-span-1 order-2 md:order-3">
+        <MultiSelect
+          :options="categorias"
+          placeholder-text="Categorias"
+          @update:selectedItems="updateSelectedItems">
+        </MultiSelect>
+      </div>
     </div>
   </div>
+  <!-- TODO clear multiselect pendiente, ya está casi terminada esta parte -->
 
   <Table :items="products" :fields="['name', 'category']" :headers="['Nombre', 'Categoria']" actions index-column>
     <template #actionsContent="{ item }">
@@ -104,6 +104,11 @@ const getProducts = async () => {
 
 const updateSelectedItems = (items: Option[]) => {
   filterParam.value = items;
+};
+
+const clearSearchBar = () => {
+  filterParam.value = [];
+  searchParam.value = "";
 };
 
 const productToEditForm = (product: Product) => {

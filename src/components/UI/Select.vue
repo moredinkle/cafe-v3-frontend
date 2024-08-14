@@ -5,7 +5,7 @@
       v-bind="$attrs"
       :class="inputClass"
       @change="emitChange">
-      <option :value="''" disabled hidden>{{ placeholderText }}</option>
+      <option :value="''" disabled>{{ placeholderText }}</option>
       <option v-for="(option, index) in options" :key="index" :value="option">
         {{ option?.[field as keyof typeof option] || option }}
       </option>
@@ -40,7 +40,7 @@ const props = defineProps({
 const inputClass = computed(() => {
   return props.error
     ? "w-full border-2 px-2 py-1 rounded-md shadow-sm dark:bg-slate-800 border-red-600 focus:ring-red-600"
-    : "w-full border border-black dark:border-slate-500 px-2 py-1 rounded-md shadow-sm dark:bg-slate-800";
+    : "w-full border border-black dark:border-white px-2 py-1 rounded-md shadow-sm dark:bg-slate-800";
 });
 
 const selectedValue = defineModel();
