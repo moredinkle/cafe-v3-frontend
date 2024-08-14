@@ -1,9 +1,8 @@
 <template>
   <div class="my-4">
-    <div class="flex justify-between">
-      <span class="font-semibold text-xl">Filtros</span>
-      <Button text-button="Crear nuevo producto" @click="openCreateForm" class="bg-green-600 py-1.5 px-4"></Button>
-    </div>
+    <span>
+      <Button text-button="Crear nuevo producto" @click="openCreateForm" class="ml-auto bg-green-600 py-1.5 px-4"></Button>
+    </span>
     <div class="my-4 grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-2">
       <IconInput v-model="searchParam" class="w-full col-span-2" placeholder="Buscar...">
         <MagnifyingGlassIcon class="size-4"></MagnifyingGlassIcon>

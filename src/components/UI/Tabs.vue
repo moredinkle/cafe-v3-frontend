@@ -2,9 +2,9 @@
   <ul class="flex flex-wrap -mb-px">
     <li class="me-2" v-for="item in items" :key="item.value">
       <a
-        @click.prevent="selectedTabValue = item.value"
+        @click.prevent="emitTabChange(item.value)"
         href="#"
-        :class="[defaultClass, item.value === selectedTabValue ? selectedClass : '']"
+        :class="[defaultClass, item.value === props.selectedTab ? selectedClass : '']"
       >
         {{ item.text }}
       </a>
@@ -16,8 +16,6 @@
 import type { Link } from "@/utils/types";
 import { ref, type PropType } from "vue";
 
-
-
 const defaultClass = "font-semibold inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300";
 const selectedClass = "text-blue-600 border-blue-600 dark:text-blue-400 dark:border-blue-400";
 
@@ -26,7 +24,15 @@ const props = defineProps({
     type: Array as PropType<Link[]>,
     required: true,
   },
+  selectedTab: {
+    type: String,
+    required: true,
+  },
 });
-let selectedTabValue = ref(props.items[0].value);
+
+const emit = defineEmits(['tabChange']);
+const emitTabChange = (value: string) => {
+  emit('tabChange', value);
+};
 
 </script>
