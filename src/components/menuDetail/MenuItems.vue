@@ -26,6 +26,7 @@
       <FormFieldWrapper label="Producto" :input-col-span="12">
         <Select :options="products" field="name" placeholder="Seleccione un producto"></Select>
       </FormFieldWrapper>
+      <LiveSearchBar v-model="newItemProduct" :search-results="products" display-field="name" @start-search="searchProducts" @select-result="selectResult"></LiveSearchBar>
       <FormFieldWrapper label="Precio" :input-col-span="12">
         <Input :model-value="newItemPrice"/>
       </FormFieldWrapper>
@@ -41,7 +42,8 @@ import { Mapper } from "@/utils/mapper";
 import type { MenuItem, Product } from "@/utils/types";
 import { BriefcaseIcon, PencilIcon, TrashIcon } from "@heroicons/vue/24/outline";
 import axios from "axios";
-import { onMounted, ref, type PropType } from "vue";
+import { ref, type PropType } from "vue";
+import { type Option } from "@/utils/types";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -55,11 +57,19 @@ const newItemModalVisible = ref(false);
 const products = ref([] as Product[]);
 const newItemPrice = ref('');
 const newItemStock = ref('');
+const newItemProduct = ref('');
+const selectedProduct = ref<Product>();
 
-const getProducts = async () => {
-  const response = await axios.get(`${backendUrl}/products`);
+const searchProducts = async () => {
+  const response = await axios.get(`${backendUrl}/products?name=${newItemProduct.value}`);
   products.value = response.data.data.map((item: any) => Mapper.toProduct(item));
 };
 
-onMounted(getProducts);
+const selectResult = async (item: Option) => {
+  selectedProduct.value = item as Product;
+  newItemProduct.value = selectedProduct.value.name;
+};
+
+
+// onMounted(getProducts);
 </script>

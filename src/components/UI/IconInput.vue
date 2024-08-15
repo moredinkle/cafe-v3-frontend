@@ -19,7 +19,7 @@
     errorMessage: {
       type: String,
       default: 'Campo inválido'
-    }
+    },
   });
   
   const inputClass = computed(() => {

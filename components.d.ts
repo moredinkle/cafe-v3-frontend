@@ -21,6 +21,7 @@ declare module 'vue' {
     IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
     Input: typeof import('./src/components/UI/Input.vue')['default']
+    LiveSearchBar: typeof import('./src/components/UI/LiveSearchBar.vue')['default']
     MenuItems: typeof import('./src/components/menuDetail/MenuItems.vue')['default']
     MenusView: typeof import('./src/components/homepage/MenusView.vue')['default']
     Modal: typeof import('./src/components/UI/Modal.vue')['default']
