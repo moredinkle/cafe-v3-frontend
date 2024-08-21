@@ -13,6 +13,7 @@ export interface Product {
     id: string;
     name: string;
     category: string;
+    basePrice: number;
     menuItem?: MenuItem;
     createdAt: Date;
     updatedAt: Date;
@@ -22,7 +23,7 @@ export interface Product {
     id: string;
     product: Product;
     productId: string;
-    price: number; // You can use a library like 'decimal.js' for better decimal handling if needed
+    price: number;
     stock: number;
     menu: Menu;
     menuId: string;

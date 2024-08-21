@@ -35,6 +35,7 @@ export class Mapper {
       id: data.id,
       name: data.name,
       category: data.category,
+      basePrice: data.basePrice,
       menuItem: data.menuItem || null,
       createdAt: new Date(data.createdAt) || data.createdAt,
       updatedAt: new Date(data.updatedAt) || data.updatedAt,

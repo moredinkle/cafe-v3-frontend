@@ -26,9 +26,8 @@
       </div>
     </div>
   </div>
-  <!-- TODO clear multiselect pendiente, ya está casi terminada esta parte -->
 
-  <Table :items="products" :fields="['name', 'category']" :headers="['Nombre', 'Categoria']" actions index-column>
+  <Table :items="products" :fields="['name', 'basePrice', 'category']" :headers="['Nombre', 'Precio base', 'Categoria']" actions index-column>
     <template #actionsContent="{ item }">
       <Button class="py-0 px-1">
         <PencilIcon
@@ -52,6 +51,9 @@
       @confirm-clicked="saveProduct">
       <FormFieldWrapper label="Nombre">
         <Input v-model="productForm.name" :error="nameError" :error-message="nameErrorMessage" />
+      </FormFieldWrapper>
+      <FormFieldWrapper label="Precio base">
+        <Input v-model="productForm.basePrice" type="number":error="basePriceError" :error-message="basePriceErrorMessage" />
       </FormFieldWrapper>
       <FormFieldWrapper label="Categoria" class="mb-4">
         <Select
@@ -83,6 +85,7 @@ const products = ref<Product[]>([]);
 const productForm = reactive({
   name: "",
   category: "",
+  basePrice: 0,
   id: "",
 });
 const productFormModalVisible = ref(false);
@@ -91,6 +94,8 @@ const nameError = ref(false);
 const nameErrorMessage = ref("");
 const categoryError = ref(false);
 const categoryErrorMessage = ref("");
+const basePriceError = ref(false);
+const basePriceErrorMessage = ref("");
 const searchParam = ref("");
 const filterParam = ref<Option[]>([]);
 
@@ -119,9 +124,9 @@ const clearSearchBar = () => {
 const productToEditForm = (product: Product) => {
   productForm.name = product.name;
   productForm.category = product.category;
+  productForm.basePrice = product.basePrice;
   productForm.id = product.id;
   productFormModalVisible.value = true;
-  console.log(productForm);
 };
 
 const openCreateForm = () => {
@@ -132,16 +137,21 @@ const openCreateForm = () => {
 const cleanForm = () => {
   productForm.name = "";
   productForm.category = "";
+  productForm.basePrice = 0;
   productForm.id = "";
+
   categoryError.value = false;
   categoryErrorMessage.value = "";
   nameError.value = false;
   nameErrorMessage.value = "";
+  basePriceError.value = false;
+  basePriceErrorMessage.value = "";
 };
 
 const validateForm = () => {
   categoryError.value = false;
   nameError.value = false;
+  basePriceError.value = false;
 
   if (!productForm.name) {
     categoryError.value = true;
@@ -151,8 +161,12 @@ const validateForm = () => {
     nameError.value = true;
     nameErrorMessage.value = "Campo obligatorio";
   }
+  if (!productForm.basePrice) {
+    basePriceError.value = true;
+    basePriceErrorMessage.value = "Campo obligatorio";
+  }
 
-  if (nameError.value || categoryError.value) {
+  if (nameError.value || categoryError.value || basePriceError.value) {
     return false;
   }
   return true;
@@ -189,6 +203,7 @@ const saveProduct = async () => {
 
     const body = {
       name: productForm.name,
+      basePrice: productForm.basePrice,
       category: productForm.category.toUpperCase(),
     };
     let successMessage = "Producto creado con exito";
