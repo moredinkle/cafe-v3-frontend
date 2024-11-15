@@ -23,6 +23,7 @@ export class Mapper {
       productId: data.productId,
       price: parseFloat(data.price),
       stock: data.stock,
+      originalStock: data.originalStock,
       menu: data.menu ? Mapper.toMenu(data.menu) : null,
       menuId: data.menuId,
       createdAt: new Date(data.createdAt) || data.createdAt,

@@ -28,6 +28,7 @@ declare module 'vue' {
     MultiSelect: typeof import('./src/components/UI/MultiSelect.vue')['default']
     Navbar: typeof import('./src/components/UI/Navbar.vue')['default']
     ProductsView: typeof import('./src/components/homepage/ProductsView.vue')['default']
+    ProgressBar: typeof import('./src/components/UI/ProgressBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SectionHeader: typeof import('./src/components/UI/SectionHeader.vue')['default']

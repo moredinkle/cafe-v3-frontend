@@ -85,7 +85,7 @@ const products = ref<Product[]>([]);
 const productForm = reactive({
   name: "",
   category: "",
-  basePrice: 0,
+  basePrice: null as number | null,
   id: "",
 });
 const productFormModalVisible = ref(false);
@@ -137,7 +137,7 @@ const openCreateForm = () => {
 const cleanForm = () => {
   productForm.name = "";
   productForm.category = "";
-  productForm.basePrice = 0;
+  productForm.basePrice = null;
   productForm.id = "";
 
   categoryError.value = false;
