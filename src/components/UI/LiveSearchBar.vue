@@ -1,6 +1,6 @@
 <template>
   <div>
-    <IconInput v-model="searchValue" class="w-full" placeholder="Buscar...">
+    <IconInput v-model="searchValue" class="w-full" placeholder="Buscar..." v-bind="$attrs">
       <MagnifyingGlassIcon class="size-4"></MagnifyingGlassIcon>
     </IconInput>
     <ul class="border-l border-r border-b rounded-b-lg px-1 -my-1" v-if="showResults || loading">

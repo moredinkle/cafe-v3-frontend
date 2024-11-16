@@ -5,7 +5,7 @@
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-8">
       <Card
-        class="transition-transform duration-300 transform hover:scale-110 dark:hover:bg-slate-700 hover:bg-slate-200"
+        class="transition transform duration-300 hover:scale-110 dark:hover:bg-slate-700 hover:bg-slate-200"
         header-size="small"
         @click="goToMenu(menu)"
         v-for="menu in menus"

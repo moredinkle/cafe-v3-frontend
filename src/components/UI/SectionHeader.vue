@@ -1,6 +1,6 @@
 <template>
   <header class="flex justify-between items-center gap-2 px-1 mb-2">
-    <div class="flex justify-start items-center gap-2">
+    <div class="flex justify-start items-center gap-2 w-full">
       <slot name="headerIcon"></slot>
       <div v-if="title || subtitle">
         <span :class="titleClass">{{ title }}</span>

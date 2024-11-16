@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
-    <div :class="['h-2 rounded-full', color]" :style="{ width: `${progress}%` }"></div>
+  <div class="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+    <div :class="['h-1.5 rounded-full', color]" :style="{ width: `${progress}%` }"></div>
   </div>
 </template>
 
