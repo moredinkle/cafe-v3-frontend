@@ -29,6 +29,7 @@ declare module 'vue' {
     Navbar: typeof import('./src/components/UI/Navbar.vue')['default']
     ProductsView: typeof import('./src/components/homepage/ProductsView.vue')['default']
     ProgressBar: typeof import('./src/components/UI/ProgressBar.vue')['default']
+    Resumen: typeof import('./src/components/menuDetail/Resumen.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SectionHeader: typeof import('./src/components/UI/SectionHeader.vue')['default']

@@ -26,6 +26,7 @@ export interface Product {
     price: number;
     stock: number;
     originalStock: number;
+    sold: number;
     menu: Menu;
     menuId: string;
     createdAt: Date;

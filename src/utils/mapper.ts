@@ -24,6 +24,7 @@ export class Mapper {
       price: parseFloat(data.price),
       stock: data.stock,
       originalStock: data.originalStock,
+      sold: data.sold,
       menu: data.menu ? Mapper.toMenu(data.menu) : null,
       menuId: data.menuId,
       createdAt: new Date(data.createdAt) || data.createdAt,

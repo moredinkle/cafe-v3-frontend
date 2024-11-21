@@ -25,7 +25,7 @@
           </Button>
         </div>
       </template>
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-1">
         <span class="items-center">
           <CurrencyDollarIcon class="size-5 text-slate-300 text-opacity-80 mr-1 inline-block"></CurrencyDollarIcon>
           Precio: Bs. {{ item.price }}
@@ -71,7 +71,7 @@ const props = defineProps({
   menuItems: {
     type: Array as PropType<MenuItem[]>
   }
-})
+});
 
 const newItemModalVisible = ref(false);
 const editingItem = ref(false);
@@ -81,6 +81,7 @@ const menuItemForm = reactive({
   productName: "",
   price: null as number | null,
   stock: null as number | null,
+  originalStock: null as number | null,
   id: "",
   productId: "",
 });
@@ -89,6 +90,7 @@ const editItem = (item: MenuItem) => {
   menuItemForm.id = item.id;
   menuItemForm.price = item.price;
   menuItemForm.stock = item.stock;
+  menuItemForm.originalStock = item.originalStock;
   menuItemForm.productName = item.product.name;
   menuItemForm.productId = item.product.id;
   newItemModalVisible.value = true;
@@ -102,6 +104,7 @@ const toggleMenuItemForm = (open = true) => {
     menuItemForm.productName = '';
     menuItemForm.price = null;
     menuItemForm.stock = null;
+    menuItemForm.originalStock = null;
     menuItemForm.productId = '';
   }
 };
@@ -123,7 +126,8 @@ const saveItem = async (edit = false) => {
     const body = {
       productId: menuItemForm.productId,
       price: Number(menuItemForm.price),
-      stock: Number(menuItemForm.stock)
+      stock: Number(menuItemForm.stock),
+      originalStock: Number(menuItemForm.originalStock)
     };
     if(edit){
       const reqUrl = `${backendUrl}/menus/${route.params.menuId}/items/${menuItemForm.id}`;
