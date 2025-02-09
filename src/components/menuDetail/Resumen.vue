@@ -53,7 +53,8 @@ const saveSummary = async () => {
       return {
         id: item.id,
         productId: item.productId,
-        sold: item.sold
+        sold: item.sold,
+        stock: item.stock
       }
     });
     const response = await axios.put(`${backendUrl}/menus/${route.params.menuId}/items`, body);

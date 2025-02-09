@@ -35,10 +35,25 @@
           @click="productToEditForm(item as Product)"></PencilIcon>
       </Button>
       <Button class="py-0 px-1">
-        <TrashIcon class="size-5 text-blue-600 dark:text-blue-400"></TrashIcon>
+        <TrashIcon class="size-5 text-blue-600 dark:text-blue-400" @click="openDeleteModal(item as Product)">
+        </TrashIcon>
       </Button>
     </template>
   </Table>
+
+  <Modal
+    :title="`Eliminar ${productToDelete.name}`"
+    :visible="deleteProductModal"
+    @close="deleteProductModal = false"
+  >
+    <div class="flex gap-1 justify-center mt-8">
+      <Button text-button="Cancelar" @click="deleteProductModal = false" class="bg-red-600"></Button>
+      <Button text-button="Confirmar" @click="deleteProduct" class="bg-green-600"></Button>
+    </div>
+
+
+
+  </Modal>
 
   <Modal
     :title="`${productForm.id ? 'Editar' : 'Crear'} producto`"
@@ -89,6 +104,8 @@ const productForm = reactive({
   id: "",
 });
 const productFormModalVisible = ref(false);
+const deleteProductModal = ref(false);
+const productToDelete = ref<Product>({} as Product);
 const categorias = Object.values(ProductCategories);
 const nameError = ref(false);
 const nameErrorMessage = ref("");
@@ -193,6 +210,27 @@ const editProduct = async (body: object) => {
 const createProduct = async (body: object) => {
   const reqUrl = `${backendUrl}/products`;
   const response = await axios.post(reqUrl, body);
+};
+
+const openDeleteModal = async (product: Product) => {
+  deleteProductModal.value = true;
+  productToDelete.value = product;
+};
+
+const deleteProduct = async () => {
+  try {
+    const reqUrl = `${backendUrl}/products/${productToDelete.value.id}`;
+    const response = await axios.delete(reqUrl);
+    deleteProductModal.value = false;
+    productToDelete.value = {} as Product;
+    alert.showAlert("Producto eliminado", "success", "bg-green-600");
+    await getProducts();
+  } 
+  catch (err: any) {
+    if (err.response?.status >= 400) {
+      alert.showAlert(err.response.data.message || (err as string), "error", "bg-red-600");
+    }
+  }
 };
 
 const saveProduct = async () => {

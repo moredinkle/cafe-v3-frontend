@@ -19,7 +19,7 @@
         </template>
       </SectionHeader>
 
-      <slot name="default"></slot>
+      <slot name="default" class="flex justify-center"></slot>
 
       <footer v-if="footerButtonText" class="flex justify-end pt-4 px-1">
         <slot name="footerContent"></slot>
