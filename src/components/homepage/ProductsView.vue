@@ -42,8 +42,9 @@
   </Table>
 
   <Modal
-    :title="`Eliminar ${productToDelete.name}`"
+    :title="`Seguro que desea eliminar ${productToDelete.name}?`"
     :visible="deleteProductModal"
+    :close-button="false"
     @close="deleteProductModal = false"
   >
     <div class="flex gap-1 justify-center mt-8">
@@ -229,6 +230,8 @@ const deleteProduct = async () => {
   catch (err: any) {
     if (err.response?.status >= 400) {
       alert.showAlert(err.response.data.message || (err as string), "error", "bg-red-600");
+      deleteProductModal.value = false;
+      productToDelete.value = {} as Product;
     }
   }
 };

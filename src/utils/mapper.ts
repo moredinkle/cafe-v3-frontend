@@ -25,6 +25,7 @@ export class Mapper {
       stock: data.stock,
       originalStock: data.originalStock,
       sold: data.sold,
+      previousSold: data.sold,
       menu: data.menu ? Mapper.toMenu(data.menu) : null,
       menuId: data.menuId,
       createdAt: new Date(data.createdAt) || data.createdAt,

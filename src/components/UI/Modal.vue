@@ -4,7 +4,7 @@
     <!-- Overlay -->
     <div class="fixed inset-0 bg-black bg-opacity-50" @click="closeModal()"></div>
     <div class="bg-white dark:bg-gray-800 rounded shadow-lg z-10 max-w-lg w-full p-4">
-      <div class="text-start">
+      <div class="text-start" v-if="closeButton">
         <button @click="closeModal()" class="text-slate-800 dark:text-slate-100">
           <XMarkIcon class="h-5 w-5" />
         </button>
@@ -44,7 +44,11 @@ const props = defineProps({
   blocked: Boolean,
   title: String,
   subtitle: String,
-  footerButtonText: String
+  footerButtonText: String,
+  closeButton: {
+    type: Boolean,
+    default: true
+  }
 });
 
 const emit = defineEmits(["close"]);

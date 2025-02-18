@@ -27,6 +27,7 @@ export interface Product {
     stock: number;
     originalStock: number;
     sold: number;
+    previousSold: number;
     menu: Menu;
     menuId: string;
     createdAt: Date;
@@ -47,7 +48,7 @@ export type ProductCategory = "DULCE" | "SALADO" | "BEBIDA";
 export type Option = string | number | object | null;
 
 export enum ProductCategories {
-  ducle = "DULCE",
+  dulce = "DULCE",
   salado = "SALADO",
   bebida = "BEBIDA"
 }
