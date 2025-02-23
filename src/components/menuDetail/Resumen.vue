@@ -29,12 +29,13 @@
 import type { MenuItem } from "@/utils/types";
 import { PencilSquareIcon, ArrowUpOnSquareIcon } from "@heroicons/vue/24/outline";
 import axios from "axios";
-import { inject, onMounted, ref, type PropType } from "vue";
+import { inject, onMounted, ref, watch, type PropType } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const alert = inject("alert") as any;
+const emit = defineEmits(["summaryUpdate"]);
 
 const props = defineProps({
   menuItems: {
@@ -61,6 +62,8 @@ const saveSummary = async () => {
     }, []);
     const response = await axios.put(`${backendUrl}/menus/${route.params.menuId}/items`, body);
     alert.showAlert("Guardado con exito", "success", "bg-green-600");
+    emit("summaryUpdate");
+    editSales.value = false;
   } catch(err: any) {
     alert.showAlert(err.response.data.message || (err as string), "error", "bg-red-600");
   }
@@ -68,5 +71,9 @@ const saveSummary = async () => {
 
 onMounted(() => {
   items.value = [...props.menuItems];
+});
+
+watch(() => props.menuItems, (newVal) => {
+  items.value = [...newVal];
 });
 </script>

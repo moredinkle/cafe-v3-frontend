@@ -2,14 +2,14 @@
   <div>
     <SectionHeader text-size="large" :title="menu.formattedDate" :subtitle="menu.status"> </SectionHeader>
     <Tabs class="mb-4" :items="links" @tab-change="changeTab" :selected-tab="selectedTabValue"></Tabs>
-    <MenuItems :menu-items="menu.menuItems" v-if="selectedTabValue === 'menu'" />
-    <Resumen :menu-items="menu.menuItems" v-if="selectedTabValue === 'resumen'" />
+    <MenuItems :menu-items="menu.menuItems" v-if="selectedTabValue === 'menu'" @items-update="getMenuData" />
+    <Resumen :menu-items="menu.menuItems" v-if="selectedTabValue === 'resumen'"  @summary-update="getMenuData"/>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Mapper } from "@/utils/mapper";
-import type { Link, Menu } from "@/utils/types";
+import type { Link, Menu, MenuItem } from "@/utils/types";
 import axios from "axios";
 import { onMounted, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
@@ -17,7 +17,7 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-const menu = reactive({} as Menu);
+const menu = ref({id: '', menuItems: [] as MenuItem[]} as Menu);
 const links = [
   { text: "Menú", value: "menu" },
   { text: "Resumen", value: "resumen" },
@@ -30,7 +30,8 @@ const changeTab = (tabValue: string) => {
 
 async function getMenuData() {
   const response = await axios.get(`${backendUrl}/menus/${route.params.menuId}?complete=true`);
-  Object.assign(menu, Mapper.toMenu(response.data.data));
+  // menu = Mapper.toMenu(response.data.data) as Menu;
+  menu.value = Mapper.toMenu(response.data.data) as Menu;
 }
 
 onMounted(getMenuData);

@@ -59,13 +59,14 @@ import { Mapper } from "@/utils/mapper";
 import type { MenuItem, Product } from "@/utils/types";
 import { BriefcaseIcon, PencilIcon, TrashIcon, CurrencyDollarIcon, ClipboardDocumentListIcon } from "@heroicons/vue/24/outline";
 import axios from "axios";
-import { inject, reactive, ref, watch, type PropType } from "vue";
+import { inject, reactive, ref, type PropType } from "vue";
 import { type Option } from "@/utils/types";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const alert = inject("alert") as any;
+const emit = defineEmits(["itemsUpdate"]);
 
 const props = defineProps({
   menuItems: {
@@ -138,7 +139,7 @@ const saveItem = async (edit = false) => {
     }
     newItemModalVisible.value = false;
     alert.showAlert("Guardado con exito", "success", "bg-green-600");
-    // await getProducts(); // ? no se si se queda con el get o solo recupera el que editó, voy ver
+    emit("itemsUpdate");
   } catch(err: any) {
     alert.showAlert(err.response.data.message || (err as string), "error", "bg-red-600");
   }
@@ -157,9 +158,4 @@ const progressBarClass = (item: MenuItem) => {
   }
 };
 
-
-// onMounted(getProducts);
-// watch(newItemModalVisible, () => {
-//   editingItem.value = false;
-// });
 </script>
